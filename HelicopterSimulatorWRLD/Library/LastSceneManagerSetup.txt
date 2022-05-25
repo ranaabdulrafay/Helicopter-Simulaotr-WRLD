@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Abdul Rafay/MyPlane/Scene/Helicopter Simulator.unity
+- path: Assets/Abdul Rafay/MyPlane/Scene/Helicopter Simulator WRLD.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

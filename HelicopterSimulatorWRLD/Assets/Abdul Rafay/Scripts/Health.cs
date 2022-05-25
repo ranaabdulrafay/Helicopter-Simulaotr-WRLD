@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
     float health;
     bool isDead = false;
     public int DeadEffect;
+    AiSpawner mySpawner;
     void UpdateUi()
     {
         if (HealthBar)
@@ -35,10 +36,12 @@ public class Health : MonoBehaviour
         isDead = true;
         Pool.Instance.DeSpawn(transform);
         Pool.Instance.Spawn(DeadEffect, transform.position);
+        mySpawner.ReportDeath();
     }
 
-    public void Initialize()
+    public void Initialize(AiSpawner _spawner)
     {
+        mySpawner = _spawner;
         isDead = false;
         health = Maxhealth;
         HealthBar.fillAmount = 1;

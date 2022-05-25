@@ -27,20 +27,25 @@ public class MyPlaneWeaponsController : MonoBehaviour
                 {
                     SelectedAi = Pool.Instance.GetPoolItemList(EnemyPoolItemId)[i];
 
-                    while (SelectedAi != null
-                        && Pool.Instance.GetPoolItemList(EnemyPoolItemId).Contains(SelectedAi)
-                        && Vector3.Dot((SelectedAi.transform.position - transform.position).normalized, transform.position) > LineOfSight)
-                    {
-                        if (SelectedAi.GetComponent<Health>())
-                        {
-                            SelectedAi.GetComponent<Health>().Damage(Damage);
-                        }
-                        yield return new WaitForSeconds(FireRate);
-                    }
+                    yield return Fire();
                 }
             }
             yield return new WaitForSeconds(ScanDelay);
         }
     }
+    IEnumerator Fire()
+    {
+        float CurrentLOS = Vector3.Dot((SelectedAi.transform.position - transform.position).normalized, transform.position);
+        while (SelectedAi != null
+            && Pool.Instance.GetPoolItemList(EnemyPoolItemId).Contains(SelectedAi)
+            && CurrentLOS > LineOfSight)
+        {
 
+            if (SelectedAi.GetComponent<Health>())
+            {
+                SelectedAi.GetComponent<Health>().Damage(Damage);
+            }
+            yield return new WaitForSeconds(FireRate);
+        }
+    }
 }

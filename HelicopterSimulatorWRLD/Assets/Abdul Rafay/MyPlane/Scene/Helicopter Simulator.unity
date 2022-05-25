@@ -6113,7 +6113,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1797176815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39b7af40c70484346b832f3bc442fa16, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cea78970aa58d342838170b60059c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AIPrefab: 0
@@ -7062,7 +7062,7 @@ MonoBehaviour:
   EnemyPoolItemId: 0
   FireRate: 0.5
   ScanDelay: 1
-  LineOfSight: 0.85
+  LineOfSight: 0.9
   Damage: 5
   SelectedAi: {fileID: 0}
 --- !u!1 &978771973093044176

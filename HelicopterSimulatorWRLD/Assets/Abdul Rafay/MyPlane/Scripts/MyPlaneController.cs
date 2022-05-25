@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Wrld;
+using Wrld.Common.Maths;
+using Wrld.Space;
+using Wrld.Space.Positioners;
 
 public class MyPlaneController : MonoBehaviour
 {
@@ -27,6 +31,8 @@ public class MyPlaneController : MonoBehaviour
 
     [Header("Body")]
     public Transform Body;
+
+    public AiSpawnerOnBuilding spawner;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +53,7 @@ public class MyPlaneController : MonoBehaviour
 
         m_Rigidbody.velocity = transform.forward * Time.fixedDeltaTime * ((speed * ForwardInput) + (((SprintMultiplier - 1) * speed) * (Input.GetButton("Jump") ? 1f : 0f)));
         m_Rigidbody.position = transform.position+(Vector3.up * (AltitudeInput* AltitudeSpeed * Time.fixedDeltaTime));
+        
         Vector3 PitchRot = -Vector3.right * Time.fixedDeltaTime * m_Pitch;
         //Vector3 ForwardRot = -Vector3.right * Time.fixedDeltaTime * m_Forward;
         Vector3 RollRot = Vector3.forward * Time.fixedDeltaTime * m_Roll;
@@ -92,6 +99,10 @@ public class MyPlaneController : MonoBehaviour
         //{
         Cam.transform.rotation = Quaternion.Slerp(Cam.transform.rotation, Quaternion.LookRotation(transform.forward), Time.fixedDeltaTime * CamRotateSpeed);
         Cam.transform.position = Vector3.Lerp(Cam.transform.position, CamTarget.position, Time.fixedDeltaTime * CamFollowSpeed);
+
+
+        spawner.SetPosition(m_Rigidbody.position);
+
     }
     void Inputs()
     {

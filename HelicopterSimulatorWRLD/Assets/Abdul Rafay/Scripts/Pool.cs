@@ -127,13 +127,14 @@ public class Pool : GenericSingleton<Pool>
 
     }
 
-    public void Spawn(int id)
+    public GameObject Spawn(int id)
     {
         PoolItem poolItem = FindPoolItem(id);
         if (poolItem != null)
         {
-            poolItem.Spawn();
+           return poolItem.Spawn();
         }
+        return null;
     }
     public GameObject Spawn(int id, Vector3 position)
     {
