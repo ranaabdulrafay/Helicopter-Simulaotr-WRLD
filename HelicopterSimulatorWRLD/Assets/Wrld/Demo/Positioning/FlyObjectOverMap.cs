@@ -7,9 +7,9 @@ using Wrld.Space.Positioners;
 
 public class FlyObjectOverMap : MonoBehaviour
 {
-    float movementSpeed = 100.0f;
-    float turnSpeed = 90.0f;
-    float movementAngle = 0.0f;
+    public float movementSpeed = 100.0f;
+    public float turnSpeed = 90.0f;
+    public float movementAngle = 0.0f;
 
     public GeographicTransform coordinateFrame;
     public Transform box;
@@ -40,7 +40,7 @@ public class FlyObjectOverMap : MonoBehaviour
         coordinateFrame.SetPosition(targetPosition);
 
         //Api.Instance.CameraApi.MoveTo(targetPosition, distanceFromInterest: distance, headingDegrees: 0, tiltDegrees: 45);
-        Api.Instance.CameraApi.AnimateTo(targetPosition, distanceFromInterest: distance, transitionDuration: Time.deltaTime*followSpeed, jumpIfFarAway: true);
+        Api.Instance.CameraApi.AnimateTo(targetPosition, distanceFromInterest: distance, transitionDuration: Time.deltaTime * followSpeed, jumpIfFarAway: true);
         CheckForBuildingUnder(targetPosition);
     }
 
