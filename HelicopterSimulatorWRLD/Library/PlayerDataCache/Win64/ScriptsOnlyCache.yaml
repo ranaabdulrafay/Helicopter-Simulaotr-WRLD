@@ -17,6 +17,8 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
@@ -83,25 +85,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11940}
     - Class: 114
+      Script: {instanceID: 12250}
+    - Class: 114
       Script: {instanceID: 12412}
     - Class: 114
       Script: {instanceID: 12470}
     - Class: 114
-      Script: {instanceID: 12688}
+      Script: {instanceID: 12686}
     - Class: 114
-      Script: {instanceID: 12956}
+      Script: {instanceID: 12952}
     - Class: 114
-      Script: {instanceID: 13622}
+      Script: {instanceID: 13614}
     - Class: 114
-      Script: {instanceID: 13720}
+      Script: {instanceID: 13712}
     - Class: 114
-      Script: {instanceID: 13940}
+      Script: {instanceID: 13932}
     - Class: 114
-      Script: {instanceID: 14090}
+      Script: {instanceID: 14082}
     - Class: 114
-      Script: {instanceID: 14204}
+      Script: {instanceID: 14174}
     - Class: 114
-      Script: {instanceID: 17648}
+      Script: {instanceID: 14196}
+    - Class: 114
+      Script: {instanceID: 14208}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -331,7 +337,7 @@ ScriptsOnlyBuild:
     className: AnimationTrack
   - hash:
       serializedVersion: 2
-      Hash: 9c85472028d61a1d785d2955f9282fd8
+      Hash: 6370140a49a3832a299d637f715c3312
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyPlaces
@@ -571,12 +577,6 @@ ScriptsOnlyBuild:
     className: DisplayIndoorMapName
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MySceneManager
-  - hash:
-      serializedVersion: 2
       Hash: 6f837ce6540bb4373a87521070f5763b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -751,7 +751,7 @@ ScriptsOnlyBuild:
     className: ConditionallyPreventCameraMovement
   - hash:
       serializedVersion: 2
-      Hash: f06c7482cbbf3b5808792538ee29f331
+      Hash: b8892466516b5d9af25e7864325180fd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MyPlaneWeaponController
@@ -865,6 +865,12 @@ ScriptsOnlyBuild:
     className: Health
   - hash:
       serializedVersion: 2
+      Hash: ce36c82aff98a5b5d3873b1864347a35
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PoiDataParser
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -887,12 +893,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: ce36c82aff98a5b5d3873b1864347a35
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PoiDataParser
   platform: 19
   scenePathNames:
   - Assets/Abdul Rafay/My Helicopter Controller/Scene/Helicopter Simulator.unity
