@@ -35,7 +35,7 @@ public class AiSpawner : MonoBehaviour
         {
             if (SpawnCount < MaxSpawn)
             {
-                Spawn(enemyPlaces.pointsVctr[Random.Range(0, enemyPlaces.pointsVctr.Count)]);
+                Spawn(enemyPlaces.pointsVctr[GetNextHardcodedIndex()]);
                 SpawnCount++;
             }
             yield return new WaitForSeconds(SpawnDelay);
@@ -49,7 +49,7 @@ public class AiSpawner : MonoBehaviour
         {
             if (SpawnCount < MaxSpawn)
             {
-                int index = Random.Range(0, PoiDataParser.AllPois.Count);
+                int index = GetNextPoiIndex();
                 SpawnPos.Set(float.Parse(PoiDataParser.AllPois[index].lat), float.Parse(PoiDataParser.AllPois[index].lon));
 
                 Spawn(SpawnPos);
@@ -78,6 +78,24 @@ public class AiSpawner : MonoBehaviour
         {
             //Debug.Log("No building found");
         }
+    }
+    int PoiIndex = -1;
+    int GetNextPoiIndex()
+    {
+        PoiIndex++;
+        if (PoiIndex >= PoiDataParser.AllPois.Count)
+            PoiIndex = 0;
+            
+        return PoiIndex;
+    }
+    int hcIndex = -1;
+    int GetNextHardcodedIndex()
+    {
+        hcIndex++;
+        if (hcIndex >= enemyPlaces.pointsVctr.Count)
+            hcIndex = 0;
+            
+        return hcIndex;
     }
     public void ReportDeath()
     {

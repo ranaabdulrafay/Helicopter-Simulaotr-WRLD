@@ -43,7 +43,7 @@ public class PoiDataParser : MonoBehaviour
     string PoiSetID = "11756";
 
     string allSetUrl = "https://poi.wrld3d.com/v1.1/poisets/?token=";
-    string PoisetInSetfirstHalf = "https://poi.wrld3d.com/v1.1/poisets/"; // the sid
+    string PoisetInSetfirstHalf = "https://poi.wrld3d.com/v1.1/poisets/"; // then setId
     string PoisetInSetsecondHalf = "/pois/?token="; // then this half
 
     [SerializeField]
@@ -57,11 +57,7 @@ public class PoiDataParser : MonoBehaviour
         //using (UnityWebRequest webRequest = UnityWebRequest.Get(allSetUrl + DevToken))
         using (UnityWebRequest webRequest = UnityWebRequest.Get(PoisetInSetfirstHalf + PoiSetID + PoisetInSetsecondHalf + DevToken))
         {
-            // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
-
-            string[] pages = allSetUrl.Split('/');
-            int page = pages.Length - 1;
 
             if (webRequest.isNetworkError)
             {

@@ -4,9 +4,10 @@ using UnityEngine;
 using Wrld;
 using Wrld.Space;
 using System.IO;
-[CreateAssetMenu(fileName = "Enemy Points",menuName ="Abdul Rafay/Create Ai Places")]
+[CreateAssetMenu(fileName = "Enemy Points", menuName = "Abdul Rafay/Create Ai Places")]
 public class EnemyPlaces : ScriptableObject
 {
+    public string DefaultFilePath;
     public List<Vector2> pointsVctr = new List<Vector2>();
     public List<Vector2> PathpointsVctr = new List<Vector2>();
 
@@ -17,13 +18,12 @@ public class EnemyPlaces : ScriptableObject
             return FileName + FileType;
         }
     }
-    private const string FileName = "EquipedGears";
+    private const string FileName = "EnemyPlaces";
     private const string FileType = ".dat";
 
     public void SaveToFile()
     {
         var filePath = Path.Combine(Application.persistentDataPath, FILENAME);
-        Debug.Log("Save file EquipedGears" + Application.persistentDataPath);
 
         if (!File.Exists(filePath))
         {
@@ -38,9 +38,10 @@ public class EnemyPlaces : ScriptableObject
     public void LoadDataFromFile()
     {
         var filePath = Path.Combine(Application.persistentDataPath, FILENAME);
-        Debug.Log("Load file EquipedGears" + Application.persistentDataPath);
         if (!File.Exists(filePath))
         {
+            var defaultjson = File.ReadAllText(Path.Combine(DefaultFilePath, FILENAME));
+            JsonUtility.FromJsonOverwrite(defaultjson, this);
             Debug.LogWarning($"File \"{filePath}\" not found! Using Pre Set Asset", this);
             return;
         }

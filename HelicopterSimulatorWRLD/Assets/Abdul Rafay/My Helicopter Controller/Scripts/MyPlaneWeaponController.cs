@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MyPlaneWeaponController : MonoBehaviour
 {
-    public int BulletId;
     public int EnemyPoolItemId = 0;
 
     public float FireRate;
@@ -32,6 +31,12 @@ public class MyPlaneWeaponController : MonoBehaviour
         WaitForSeconds wait = new WaitForSeconds(ScanDelay);
         while (true)
         {
+            if (MuzzleEffect != null)
+                MuzzleEffect.Stop();
+            if (BulletEffect != null)
+                BulletEffect.Stop();
+            if (ShootSoundSrc != null)
+                ShootSoundSrc.Stop();
             Enemies = Physics.OverlapSphere(gameObject.transform.position, Range, EnemyLayer);
             for (int i = 0; i < Enemies.Length; i++)
             {
@@ -54,7 +59,6 @@ public class MyPlaneWeaponController : MonoBehaviour
             && Vector3.Distance(transform.position, SelectedAi.gameObject.transform.position) < Range
             && Vector3.Dot((SelectedAi.transform.position - transform.position).normalized, transform.forward) > LineOfSight)
         {
-            Debug.Log("LOS "+ Vector3.Dot((SelectedAi.transform.position - transform.position).normalized, transform.forward));
             if (Muzzle != null)
                 Muzzle.transform.LookAt(SelectedAi);
             if (MuzzleEffect != null)
@@ -65,19 +69,13 @@ public class MyPlaneWeaponController : MonoBehaviour
                 ShootSoundSrc.Play();
             if (SelectedAiHealth)
             {
-                Debug.Log("damage");
                 SelectedAiHealth.Damage(Damage);
             }
             yield return wait;
         }
         SelectedAi = null;
         SelectedAiHealth = null;
-        if (MuzzleEffect != null)
-            MuzzleEffect.Stop();
-        if (BulletEffect != null)
-            BulletEffect.Stop();
-        if (ShootSoundSrc != null)
-            ShootSoundSrc.Stop();
+        
     }
     void OnDrawGizmos()
     {
