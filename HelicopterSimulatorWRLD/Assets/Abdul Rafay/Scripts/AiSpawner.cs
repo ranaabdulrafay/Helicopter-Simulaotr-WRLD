@@ -1,44 +1,87 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Wrld;
+using Wrld.Space;
 
 public class AiSpawner : MonoBehaviour
 {
+    public EnemyPlaces enemyPlaces;
     public int AIPrefab;
-    public Transform Player;
-    public int SpawnRange;
-    public int SpawnCount, MaxSpawn = 4;
-    public float LastSpawn, SpawnDelay;
+    int SpawnCount, MaxSpawn = 4;
+    public float SpawnDelay;
+    public PoiDataParser PoiDataParser;
     // Start is called before the first frame update
     void Start()
     {
-        SpawnCount = 0;
-        LastSpawn = Time.time;
-        InvokeRepeating("Spawn", 2, SpawnDelay);
+        enemyPlaces.LoadDataFromFile();
     }
-
-    // Update is called once per frame
-    void Update()
+    public void PoisRecieved(bool status)
     {
-
-    }
-
-    void Spawn()
-    {
-        if (SpawnCount >= MaxSpawn)
+        if (status)
         {
-            LastSpawn = Time.time;
-            return;
+            StartCoroutine(StartSpawningPois());
         }
-        Vector3 pos = Player.position + ((Random.insideUnitSphere) * SpawnRange);
-        GameObject obj = Pool.Instance.Spawn(AIPrefab, pos);
-        obj.GetComponent<Health>().Initialize(this);
-        SpawnCount++;
-        LastSpawn = Time.time;
+        else
+        {
+            StartCoroutine(StartSpawningHardCoded());
+        }
+    }
+    IEnumerator StartSpawningHardCoded()
+    {
+        enemyPlaces.LoadDataFromFile();
+        SpawnCount = 0;
+        while (true)
+        {
+            if (SpawnCount < MaxSpawn)
+            {
+                Spawn(enemyPlaces.pointsVctr[Random.Range(0, enemyPlaces.pointsVctr.Count)]);
+                SpawnCount++;
+            }
+            yield return new WaitForSeconds(SpawnDelay);
+        }
+    }
+    IEnumerator StartSpawningPois()
+    {
+        SpawnCount = 0;
+        Vector2 SpawnPos = Vector2.zero;
+        while (SpawnCount < PoiDataParser.AllPois.Count)
+        {
+            if (SpawnCount < MaxSpawn)
+            {
+                int index = Random.Range(0, PoiDataParser.AllPois.Count);
+                SpawnPos.Set(float.Parse(PoiDataParser.AllPois[index].lat), float.Parse(PoiDataParser.AllPois[index].lon));
+
+                Spawn(SpawnPos);
+                SpawnCount++;
+            }
+            yield return new WaitForSeconds(SpawnDelay);
+        }
+    }
+    void Spawn(Vector2 ll)
+    {
+        LatLong loglat = new LatLong(ll.x, ll.y);
+        var ray = Api.Instance.SpacesApi.LatLongToVerticallyDownRay(loglat);
+        LatLongAltitude buildingIntersectionPoint;
+        var didIntersectBuilding = Api.Instance.BuildingsApi.TryFindIntersectionWithBuilding(ray, out buildingIntersectionPoint);
+        if (didIntersectBuilding)
+        {
+            //Debug.Log("building found");
+
+            var boxAnchor = Pool.Instance.Spawn(AIPrefab);
+            boxAnchor.GetComponent<GeographicTransform>().SetPosition(buildingIntersectionPoint.GetLatLong());
+            boxAnchor.GetComponentInParent<Health>().Initialize(this);
+            var box = boxAnchor.transform.GetChild(0);
+            box.localPosition = Vector3.up * (float)buildingIntersectionPoint.GetAltitude();
+        }
+        else
+        {
+            //Debug.Log("No building found");
+        }
     }
     public void ReportDeath()
     {
-        SpawnCount = SpawnCount - 1 < 0 ? 0 : SpawnCount-1;
+        SpawnCount = SpawnCount - 1 < 0 ? 0 : SpawnCount - 1;
     }
 
 }

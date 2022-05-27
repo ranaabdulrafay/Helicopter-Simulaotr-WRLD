@@ -19,6 +19,7 @@ public class FindPointOnTransportNetwork : MonoBehaviour
 
     private void OnEnable()
     {
+        Api.Instance.CameraApi.MoveTo(m_inputCoords.GetLatLong());
         CreateVisualizationObjects();
 
         var options = new TransportPositionerOptionsBuilder()

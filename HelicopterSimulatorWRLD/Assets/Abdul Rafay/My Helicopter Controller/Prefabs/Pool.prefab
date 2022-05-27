@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PoolItems:
-  - Id: 0
-    Item: {fileID: 3332413376501207017, guid: 0bf5eae0a6f9dd240a3e763b91b23aee, type: 3}
-    CountSpawn: 5
   - Id: 1
     Item: {fileID: 2302070799849077889, guid: e4a7a65b297050a40a69a2b4b2c83061, type: 3}
+    CountSpawn: 5
+  - Id: 2
+    Item: {fileID: 8662730287506147606, guid: 3f034c6b391a2b74a92b3fd8df386dc1, type: 3}
     CountSpawn: 5

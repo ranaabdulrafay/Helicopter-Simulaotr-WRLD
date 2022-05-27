@@ -77,6 +77,7 @@ MonoBehaviour:
   RollAngle: 35
   PitchAngle: 20
   Body: {fileID: 529681385398190028}
+  Enemy: 0
 --- !u!54 &15453659866411054
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -102,15 +103,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 15453659866411052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aca3800c3856be4478060d8ff32de088, type: 3}
+  m_Script: {fileID: 11500000, guid: 67ba511e64fb5e7418ba52a4cb3bdd8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletId: 1
-  EnemyPoolItemId: 0
+  BulletId: 0
+  EnemyPoolItemId: 2
   FireRate: 0.5
   ScanDelay: 1
-  LineOfSight: 0.9
-  Damage: 5
+  LineOfSight: 0.75
+  Damage: 15
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 1
   SelectedAi: {fileID: 0}
 --- !u!1 &529681383743793420
 GameObject:
@@ -6643,7 +6647,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 170687098ea295841bd0136446d5f24f, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

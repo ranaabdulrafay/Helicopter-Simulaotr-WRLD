@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
@@ -11,6 +12,8 @@ public class Health : MonoBehaviour
     bool isDead = false;
     public int DeadEffect;
     AiSpawner mySpawner;
+
+    public UnityEvent OnDead;
     void UpdateUi()
     {
         if (HealthBar)
@@ -23,7 +26,7 @@ public class Health : MonoBehaviour
         if (health - DmgAmount <= 0)
         {
             health = 0;
-            OnDead();
+            Dead();
         }
         else
             health -= DmgAmount;
@@ -31,12 +34,15 @@ public class Health : MonoBehaviour
         UpdateUi();
     }
 
-    void OnDead()
+    void Dead()
     {
         isDead = true;
         Pool.Instance.DeSpawn(transform);
-        Pool.Instance.Spawn(DeadEffect, transform.position);
-        mySpawner.ReportDeath();
+        Pool.Instance.Spawn(DeadEffect, transform.GetChild(0).position);
+        if (mySpawner)
+            mySpawner.ReportDeath();
+        if (OnDead != null)
+            OnDead.Invoke();
     }
 
     public void Initialize(AiSpawner _spawner)

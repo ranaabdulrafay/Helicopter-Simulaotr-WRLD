@@ -18,7 +18,7 @@ public class CameraTransitionAnimate : MonoBehaviour
         yield return new WaitForSeconds(4.0f);
 
         var destLocation = LatLong.FromDegrees(37.802, -122.4058);
-        Api.Instance.CameraApi.AnimateTo(destLocation, distanceFromInterest: 500, headingDegrees: 270, tiltDegrees: 30, transitionDuration: 5, jumpIfFarAway: false);
+        Api.Instance.CameraApi.AnimateTo(destLocation, distanceFromInterest: 0.1f, headingDegrees: 270, tiltDegrees: 30, transitionDuration: 5, jumpIfFarAway: false);
     }
 
     private void OnDisable()
