@@ -1,6 +1,6 @@
 # Helicopter Simulator WRLD
 
-A basic helicopter simulatoin over an enviorment created by WRLD unity SDK.
+A basic helicopter simulation over an environment created by WRLD unity SDK.
 
 DEMO Video
 https://drive.google.com/file/d/18ivnuMBnjCqDjouO8bwyjt8Yc1aTFXus/view?usp=sharing
@@ -14,13 +14,8 @@ How To Play
 Use keyborad:
 
 W to move forward.
-
 S to move backwrd.
-
 A to rotate Left.
-
 D to rotate right. 
-
 Q to Assend.
-
 E to Desend.
